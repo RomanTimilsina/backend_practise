@@ -22,19 +22,19 @@ class Poll{
     for(const option of data){
       const template = document.createElement('template');
       const fragment = template.content
-
+      console.log(this.selected)
       template.innerHTML = `
-      <div class="poll__option ${this.selected == option.label ? "poll__option--selected":""}">
+      <div class="poll__option ${this.selected == option.label ? "poll__option--selected" : "" }">
       <div class="poll__option-fill"></div>
       <div class="poll__option-info">
         <span class="poll__label">${option.label}</span>
         <span class="poll__percentage">${option.percentage}</span>
       </div>
       `;
-
-      if(!this.selected){
+console.log(this.selected)
+      if (!this.selected) {
         fragment.querySelector('.poll__option').addEventListener("click", () => {
-          fetch(this.endpoint,{
+          fetch(this.endpoint, {
             method:"post",
             body:`add=${option.label}`,
             headers: {
@@ -43,7 +43,7 @@ class Poll{
           }).then(() => {
             this.selected = option.label;
 
-            sessionStorage.setItem("poll-selected",option.label);
+            sessionStorage.setItem("poll_selected", option.label);
 
             this._refresh();
           });
