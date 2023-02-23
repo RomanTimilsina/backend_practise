@@ -15,7 +15,9 @@ class Poll{
     const response = await fetch(this.endpoint);
     const data = await response.json();
 
-    console.log(data)
+    this.root.querySelectorAll('.poll__option').forEach(option => {
+      option.remove();
+    });
   }
 }
 
