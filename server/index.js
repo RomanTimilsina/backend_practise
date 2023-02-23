@@ -7,10 +7,11 @@ const dataFile = path.join(__dirname,'data.json');
 
 app.use(express.urlencoded({extended:true}));
 
-app.use((req,res,next) => {
-  res.setHeader("Access_Control-Allow-Origin","*");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   next();
-})
+});
 
 app.get("/poll", async (req, res) => {
   let data = JSON.parse(await fs.readFile(dataFile,"utf-8"));
@@ -25,7 +26,7 @@ app.get("/poll", async (req, res) => {
 
   console.log(data);
 
-  res.end();
+  res.json(data);
 })
 
 app.post("/poll", async (req,res) => {
